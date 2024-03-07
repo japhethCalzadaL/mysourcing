@@ -1,6 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { ApiService } from '../../api.service';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-form',
@@ -14,10 +16,9 @@ export class UserFormComponent {
   responseData!: any;
 
   constructor(
-    private apiService: ApiService
-  ) {
-
-   }
+    private apiService: ApiService,
+    private router: Router
+  ) {}
 
   onSubmit(): void {
     const form = this.userForm;
@@ -39,7 +40,14 @@ export class UserFormComponent {
       state
     };
 
-    console.log('Información del usuario:', user);
+    this.apiService.createUser(user).subscribe(
+      (data:any) => {
+        this.router.navigate(['/users-list']);
+      },
+      (error:any) => {
+        console.error('Error al obtener datos:', error);
+      }
+    );
   }
 
   onPostalCodeChange(): void {
@@ -60,5 +68,9 @@ export class UserFormComponent {
         }
       );
     }
+  }
+
+  goToUserList(): void {
+    this.router.navigate(['/users-list']);
   }
 }
