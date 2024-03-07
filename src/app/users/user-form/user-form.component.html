@@ -1,37 +1,45 @@
 <form (ngSubmit)="onSubmit()" class="container mt-4" #userForm="ngForm">
   <div class="mb-3">
-    <label for="nombre" class="form-label">Nombre:</label>
-    <input type="text" class="form-control" id="nombre" name="nombre" required>
+    <label for="name" class="form-label">Nombre:</label>
+    <input type="text" class="form-control" id="name" name="name" required ngModel>
   </div>
 
   <div class="mb-3">
-    <label for="apellido1" class="form-label">Primer Apellido:</label>
-    <input type="text" class="form-control" id="apellido1" name="apellido1" required>
+    <label for="lastName" class="form-label">Primer Apellido:</label>
+    <input type="text" class="form-control" id="lastName" name="lastName" required ngModel>
   </div>
 
   <div class="mb-3">
-    <label for="apellido2" class="form-label">Segundo Apellido:</label>
-    <input type="text" class="form-control" id="apellido2" name="apellido2">
+    <label for="lastSecondName" class="form-label">Segundo Apellido:</label>
+    <input type="text" class="form-control" id="lastSecondName" name="lastSecondName" ngModel>
   </div>
 
   <div class="mb-3">
     <label for="email" class="form-label">Email:</label>
-    <input type="email" class="form-control" id="email" name="email" required>
+    <input type="email" class="form-control" id="email" name="email" required ngModel>
   </div>
 
   <div class="mb-3">
-    <label for="telefono" class="form-label">Teléfono:</label>
-    <input type="tel" class="form-control" id="telefono" name="telefono">
+    <label for="phone" class="form-label">Teléfono:</label>
+    <input type="tel" class="form-control" id="phone" name="phone" ngModel>
   </div>
 
   <div class="mb-3">
-    <label for="codigoPostal" class="form-label">Código Postal:</label>
-    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal">
+    <label for="postalCode" class="form-label">Código Postal:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="postalCode"
+      name="postalCode"
+      [(ngModel)]="postalCode"
+      (ngModelChange)="onPostalCodeChange()"
+      maxlength="5"
+    >
   </div>
 
   <div class="mb-3">
-    <label for="estado" class="form-label">Estado:</label>
-    <input type="text" class="form-control" id="estado" name="estado">
+    <label for="state" class="form-label">Estado:</label>
+    <input type="text" class="form-control" id="state" name="state" ngModel readonly>
   </div>
 
   <button type="submit" class="btn btn-primary">Guardar</button>

@@ -1,5 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-user-form',
@@ -9,22 +10,55 @@ import {NgForm} from '@angular/forms';
 export class UserFormComponent {
   @ViewChild('userForm') userForm!: NgForm;
 
-  constructor() { }
+  postalCode!: string;
+  responseData!: any;
 
-  onSubmit() {
-    // Acceder a los valores del formulario
-    const form = this.userForm.form;
-    const nombre = form.controls['nombre'].value;
-    const apellido1 = form.controls['apellido1'].value;
-    // ... y así sucesivamente para otros campos.
+  constructor(
+    private apiService: ApiService
+  ) {
+
+   }
+
+  onSubmit(): void {
+    const form = this.userForm;
+    const name = form.controls['name'].value;
+    const lastName = form.controls['lastName'].value;
+    const lastSecondName = form.controls['lastSecondName'].value;
+    const email = form.controls['email'].value;
+    const phone = form.controls['phone'].value;
+    const postalCode = form.controls['postalCode'].value;
+    const state = form.controls['state'].value;
 
     const user = {
-      nombre: nombre,
-      apellido1: apellido1,
+      name,
+      lastName,
+      lastSecondName,
+      email,
+      phone,
+      postalCode,
+      state
     };
 
-    // Hacer algo con el objeto JSON (por ejemplo, imprimir en la consola)
     console.log('Información del usuario:', user);
   }
 
+  onPostalCodeChange(): void {
+    const form = this.userForm;
+    if (this.postalCode.length == 0) {
+      form.controls['state'].setValue("");
+    }
+
+    if (this.postalCode.length == 5) {
+      this.apiService.getDataByPostalCode(this.postalCode).subscribe(
+        (data:any) => {
+          this.responseData = data[0].response.ciudad;
+
+          form.controls['state'].setValue(this.responseData);
+        },
+        (error:any) => {
+          console.error('Error al obtener datos:', error);
+        }
+      );
+    }
+  }
 }
