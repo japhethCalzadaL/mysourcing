@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit()" class="container mt-4" #userForm="ngForm">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre:</label>
+    <input type="text" class="form-control" id="nombre" name="nombre" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="apellido1" class="form-label">Primer Apellido:</label>
+    <input type="text" class="form-control" id="apellido1" name="apellido1" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="apellido2" class="form-label">Segundo Apellido:</label>
+    <input type="text" class="form-control" id="apellido2" name="apellido2">
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="telefono" class="form-label">Teléfono:</label>
+    <input type="tel" class="form-control" id="telefono" name="telefono">
+  </div>
+
+  <div class="mb-3">
+    <label for="codigoPostal" class="form-label">Código Postal:</label>
+    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal">
+  </div>
+
+  <div class="mb-3">
+    <label for="estado" class="form-label">Estado:</label>
+    <input type="text" class="form-control" id="estado" name="estado">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
